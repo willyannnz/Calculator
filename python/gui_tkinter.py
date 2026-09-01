@@ -1,6 +1,17 @@
 import tkinter as tk
 from core import operations
 
+#This will create a list of numbers and operators for the calculator
+numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"]
+operators = ["+", "-", "*", "/"]
+#Here the operator_map will map the operator to the corresponding operation in the operations dictionary
+operator_map = {
+    "+": "1",
+    "-": "2",
+    "*": "3",
+    "/": "4"
+}
+
 first_number = None
 operator = None
 
@@ -37,16 +48,6 @@ def add_operator(operation):
     #here we will clear the display for the second number
     display.delete(0, tk.END)
 
-#This will create a list of numbers and operators for the calculator
-numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"]
-operators = ["+", "-", "*", "/"]
-#Here the operator_map will map the operator to the corresponding operation in the operations dictionary
-operator_map = {
-    "+": "1",
-    "-": "2",
-    "*": "3",
-    "/": "4"
-}
 
 #This will create a function to calculate the result of the operation
 def calculate():
