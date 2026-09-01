@@ -40,6 +40,7 @@ def add_operator(operation):
 #This will create a list of numbers and operators for the calculator
 numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"]
 operators = ["+", "-", "*", "/"]
+#Here the operator_map will map the operator to the corresponding operation in the operations dictionary
 operator_map = {
     "+": "1",
     "-": "2",
@@ -51,12 +52,18 @@ operator_map = {
 def calculate():
     second_number = float(display.get())
 
-    function = operations[operator]
+    function = operations[operator_map[operator]]
 
     result = function(first_number, second_number)
 
     display.delete(0, tk.END)
     display.insert(tk.END, str(result))
+
+def clear_all():
+    global first_number, operator
+    first_number = None
+    operator = None
+    display.delete(0, tk.END)
 
 #This will create the buttons numbers for the calculator
 for i, number in enumerate(numbers):
@@ -89,6 +96,14 @@ button_equal = tk.Button(
     command=calculate
 )
 button_equal.grid(row=4, column=1, sticky="nsew")
+
+#This will create the clear button for the calculator
+button_clear = tk.Button(
+    window,
+    text="C",
+    command=clear_all
+)
+button_clear.grid(row=4, column=2, sticky="nsew")
 
 window.mainloop()
 
