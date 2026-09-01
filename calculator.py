@@ -9,7 +9,7 @@ def multiply(a,b):
 
 def divide(a,b):
     if b == 0:
-        return "Erro: Não é possivel dividir por zero(0)."
+        return None
     return a / b
 
 operations = {
@@ -49,7 +49,10 @@ while True:
     result = function(number1, number2)
 
     if result is None:
-        print("Erro: Operação inválida.")
+        if opcao == "4":
+            print("Erro: Divisão por zero é inválida.")
+        else:
+            print("Erro: Operação inválida.")
     else:
         print(f"Resultado: {result}")
 
