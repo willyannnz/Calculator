@@ -18,7 +18,9 @@ display.grid(row=0, column=0, columnspan=4, sticky="nsew")
 
 def add_number(number):
     display.insert(tk.END, str(number))
-
+def add_operator(operator):
+    display.insert(tk.END, str(operator))
+    
 numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"]
 
 for i, number in enumerate(numbers):
@@ -32,6 +34,17 @@ for i, number in enumerate(numbers):
     column = i % 3
 
     button.grid(row=line, column=column, sticky="nsew")
+
+operators = ["+", "-", "*", "/"]
+
+for i, operator in enumerate(operators):
+    button = tk.Button(
+        window,
+        text = operator,
+        command = lambda op=operator: add_operator(op)
+    )
+
+    button.grid(row=i + 1, column=3, sticky="nsew")
 
 window.mainloop()
 
