@@ -7,10 +7,31 @@ window = tk.Tk()
 window.title("Calculadora")
 window.geometry("300x400")
 
-#This will create a display for the calculator
-display = tk.Entry(window)
-display.grid(row=0, column=0)
+for coluna in range(4):
+    window.columnconfigure(coluna, weight=1)
+for linha in range(6):
+    window.rowconfigure(linha, weight=1)
 
+#This will create a display for the calculator
+display = tk.Entry(window, font=("Arial", 20))
+display.grid(row=0, column=0, columnspan=4, sticky="nsew")
+
+def add_number(number):
+    display.insert(tk.END, str(number))
+
+numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"]
+
+for i, number in enumerate(numbers):
+    button = tk.Button(
+        window,
+        text = number,
+        command = lambda num=number: add_number(num)
+    )
+
+    line = i // 3 + 1
+    column = i % 3
+
+    button.grid(row=line, column=column, sticky="nsew")
 
 window.mainloop()
 
