@@ -1,0 +1,20 @@
+def sum(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+
+operations = {
+    "1": sum,
+    "2": subtract,
+    "3": multiply,
+    "4": divide
+}

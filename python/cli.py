@@ -1,23 +1,5 @@
-def sum(a,b):
-    return a + b
+from core import operations
 
-def subtract(a,b):
-    return a - b
-
-def multiply(a,b):
-    return a * b
-
-def divide(a,b):
-    if b == 0:
-        return None
-    return a / b
-
-operations = {
-    "1": sum,
-    "2": subtract,
-    "3": multiply,
-    "4": divide
-}
 
 def show_menu():
     print("\n======CALCULADORA======")
@@ -30,12 +12,12 @@ def show_menu():
 
 while True:
     show_menu()
-    opcao = input("Digite uma opção: ")
+    option = input("Digite uma opção: ")
 
-    if opcao == "0":
+    if option == "0":
         print("Calculadora Encerrada!")
         break
-    if opcao not in operations:
+    if option not in operations:
         print("Opção inválida!")
         continue
 
@@ -45,14 +27,14 @@ while True:
     except ValueError:
         print("Digite apenas números.")
         continue
-    function = operations[opcao]
+
+    function = operations[option]
     result = function(number1, number2)
 
     if result is None:
-        if opcao == "4":
+        if option == "4":
             print("Erro: Divisão por zero é inválida.")
         else:
             print("Erro: Operação inválida.")
     else:
         print(f"Resultado: {result}")
-
