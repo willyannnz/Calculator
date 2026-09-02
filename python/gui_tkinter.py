@@ -55,6 +55,10 @@ def add_operator(operation):
 
     display.delete(0, tk.END)
 
+def add_decimal_point():
+    current_text = display.get()
+    if "." not in current_text:
+        display.insert(tk.END, ".")
 
 #This will apply the last pending operation and show the final result
 def calculate():
@@ -116,7 +120,7 @@ for i, number in enumerate(number_rows):
 
 #This will create the "0" button, spanning the first three columns of the bottom row
 button_zero = tk.Button(window,text="0",bg="lightgray",fg="black",command=lambda: add_number("0"))
-button_zero.grid(row=5, column=0, columnspan=3, sticky="nsew")
+button_zero.grid(row=5, column=0, columnspan=2, sticky="nsew")
 
 #This will create the operator buttons, each aligned with its matching row of numbers
 button_divide = tk.Button(window, text="/", bg="orange", fg="white", command=lambda: add_operator("/"))
@@ -145,5 +149,8 @@ button_clear.grid(row=1, column=0, columnspan=2, sticky="nsew")
 #This will create the backspace button for the calculator
 button_backspace = tk.Button(window,text="←",bg="lightgray",fg="black",command=backspace)
 button_backspace.grid(row=1, column=2, sticky="nsew")
+
+button_decimal = tk.Button(window,text=".",bg="lightgray",fg="black",command=add_decimal_point)
+button_decimal.grid(row=5, column=2, sticky="nsew")
 
 window.mainloop()
