@@ -1,9 +1,8 @@
 import tkinter as tk
 from core import operations
 
-#This will create a list of numbers and operators for the calculator
-numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"]
-operators = ["+", "-", "*", "/"]
+#This will create a list of numbers for the calculator (0 is placed separately, spanning the bottom row)
+number_rows = ["7", "8", "9", "4", "5", "6", "1", "2", "3"]
 #Here the operator_map will map the operator to the corresponding operation in the operations dictionary
 operator_map = {
     "+": "1",
@@ -21,12 +20,12 @@ window = tk.Tk()
 
 #Window title and size
 window.title("Calculadora")
-window.geometry("300x400")
+window.geometry("300x450")
 
 #This will create a grid layout for the calculator
 for coluna in range(4):
     window.columnconfigure(coluna, weight=1)
-for linha in range(5):
+for linha in range(6):
     window.rowconfigure(linha, weight=1)
 
 #This will create a display for the calculator
@@ -96,53 +95,55 @@ def clear_all():
     pending_operator = None
     display.delete(0, tk.END)
 
-#This will create the buttons numbers for the calculator
-for i, number in enumerate(numbers):
+def backspace():
+    current_text = display.get()
+    if current_text:
+        display.delete(len(current_text) - 1, tk.END)
+#This will create the number buttons 7-9, 4-6, 1-3, aligned in a 3x3 grid
+for i, number in enumerate(number_rows):
     button = tk.Button(
         window,
-        text = number,
-        bg = "lightgray",
-        fg = "black",
-        command = lambda num=number: add_number(num)
+        text=number,
+        bg="lightgray",
+        fg="black",
+        command=lambda num=number: add_number(num)
     )
 
-    line = i // 3 + 1
+    line = i // 3 + 2
     column = i % 3
 
     button.grid(row=line, column=column, sticky="nsew")
 
+#This will create the "0" button, spanning the first three columns of the bottom row
+button_zero = tk.Button(window,text="0",bg="lightgray",fg="black",command=lambda: add_number("0"))
+button_zero.grid(row=5, column=0, columnspan=3, sticky="nsew")
 
-#This will create the operator buttons for the calculator
-for i, operation in enumerate(operators):
-    button = tk.Button(
-        window,
-        text=operation,
-        bg="orange",
-        fg="white",
-        command=lambda op=operation: add_operator(op)
-    )
+#This will create the operator buttons, each aligned with its matching row of numbers
+button_divide = tk.Button(window, text="/", bg="orange", fg="white", command=lambda: add_operator("/"))
+button_divide.grid(row=1, column=3, sticky="nsew")
 
-    button.grid(row=i + 1, column=3, sticky="nsew")
+#This will create the operator buttons, each aligned with its matching row of numbers
+button_multiply = tk.Button(window, text="*", bg="orange", fg="white", command=lambda: add_operator("*"))
+button_multiply.grid(row=2, column=3, sticky="nsew")
+
+#This will create the operator buttons, each aligned with its matching row of numbers
+button_subtract = tk.Button(window, text="-", bg="orange", fg="white", command=lambda: add_operator("-"))
+button_subtract.grid(row=3, column=3, sticky="nsew")
+
+#This will create the operator buttons, each aligned with its matching row of numbers
+button_add = tk.Button(window, text="+", bg="orange", fg="white", command=lambda: add_operator("+"))
+button_add.grid(row=4, column=3, sticky="nsew")
 
 #This will create the equal button for the calculator
-button_equal = tk.Button(
-    window,
-    text="=",
-    bg="green",
-    fg="white",
-    command=calculate
-)
-button_equal.grid(row=4, column=1, sticky="nsew")
+button_equal = tk.Button(window,text="=",bg="green",fg="white",command=calculate)
+button_equal.grid(row=5, column=3, sticky="nsew")
 
-#This will create the clear button for the calculator
-button_clear = tk.Button(
-    window,
-    text="C",
-    bg="red",
-    fg="white",
-    command=clear_all
-)
-button_clear.grid(row=4, column=2, sticky="nsew")
+#This will create the clear button, spanning the first two columns of the top row
+button_clear = tk.Button(window,text="C",bg="red",fg="white",command=clear_all)
+button_clear.grid(row=1, column=0, columnspan=2, sticky="nsew")
+
+#This will create the backspace button for the calculator
+button_backspace = tk.Button(window,text="←",bg="lightgray",fg="black",command=backspace)
+button_backspace.grid(row=1, column=2, sticky="nsew")
 
 window.mainloop()
-
