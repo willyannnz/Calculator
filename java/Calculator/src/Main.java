@@ -19,6 +19,32 @@ public class Main {
                 break;
             }
 
+            System.out.println("Digite o primeiro número: ");
+            double a = scanner.nextDouble();
+            System.out.println("Digite o segundo número: ");
+            double b = scanner.nextDouble();
+
+            double result = 0;
+            switch (opcao){
+                case "1":
+                    result = calculator.sum(a,b);
+                    break;
+                case "2":
+                    result = calculator.subtract(a,b);
+                    break;
+                case "3":
+                    result = calculator.divide(a,b);
+                    break;
+                case "4":
+                    result = calculator.multiply(a,b);
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+
+            }
+
+            System.out.println("O resultado é: " + result);
+
         }
     }
 }
