@@ -30,7 +30,7 @@ for linha in range(5):
     window.rowconfigure(linha, weight=1)
 
 #This will create a display for the calculator
-display = tk.Entry(window, font=("Arial", 30))
+display = tk.Entry(window, font=("Arial", 20))
 display.grid(row=0, column=0, columnspan=4, sticky="nsew")
 
 #This will add numbers to the display when the buttons are pressed
@@ -61,10 +61,24 @@ def add_operator(operation):
 def calculate():
     global accumulated_result, pending_operator
 
+    #Here we check if there's a pending operation to apply, if not we just return the current number
+    if pending_operator is None:
+        #no operation to apply, just return the current number
+        display.delete(0, tk.END)
+        display.insert(tk.END, "Digite uma operação antes de calcular")
+        return 
+
+
     current_number = float(display.get())
 
     function = operations[operator_map[pending_operator]]
     result = function(accumulated_result, current_number)
+
+    if result is None:
+        display.delete(0, tk.END)
+        display.insert(tk.END, "Erro: Divisão por zero")
+        return
+
 
     display.delete(0, tk.END)
     display.insert(tk.END, str(result))
