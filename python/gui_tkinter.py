@@ -12,8 +12,9 @@ operator_map = {
     "/": "4"
 }
 
-first_number = None
-operator = None
+#This will create a variable to store the accumulated result and the pending operator
+accumulated_result = None
+pending_operator = None
 
 #Window creation
 window = tk.Tk()
@@ -36,34 +37,46 @@ display.grid(row=0, column=0, columnspan=4, sticky="nsew")
 def add_number(number):
     display.insert(tk.END, str(number))
 
-#This will add the operator to the display when the buttons are pressed
+#This will apply the pending operation (if any) and store the new operator,
+#so we can chain as many operations as the user wants (2 + 3 + 5 + ...)
 def add_operator(operation):
-    global first_number, operator
+    global accumulated_result, pending_operator
 
-    #here we will get the first number and the operator
-    first_number = float(display.get())
-    #here we will get the operator and store it in a global variable
-    operator = operation
+    current_number = float(display.get())
 
-    #here we will clear the display for the second number
+    if accumulated_result is None:
+        #first number typed: nothing to accumulate yet
+        accumulated_result = current_number
+    else:
+        #there's already a pending operation: apply it before storing the new one
+        function = operations[operator_map[pending_operator]]
+        accumulated_result = function(accumulated_result, current_number)
+
+    pending_operator = operation
+
     display.delete(0, tk.END)
 
 
-#This will create a function to calculate the result of the operation
+#This will apply the last pending operation and show the final result
 def calculate():
-    second_number = float(display.get())
+    global accumulated_result, pending_operator
 
-    function = operations[operator_map[operator]]
+    current_number = float(display.get())
 
-    result = function(first_number, second_number)
+    function = operations[operator_map[pending_operator]]
+    result = function(accumulated_result, current_number)
 
     display.delete(0, tk.END)
     display.insert(tk.END, str(result))
 
+    #reset so the next calculation starts clean
+    accumulated_result = None
+    pending_operator = None
+
 def clear_all():
-    global first_number, operator
-    first_number = None
-    operator = None
+    global accumulated_result, pending_operator
+    accumulated_result = None
+    pending_operator = None
     display.delete(0, tk.END)
 
 #This will create the buttons numbers for the calculator
