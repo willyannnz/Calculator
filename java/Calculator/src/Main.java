@@ -25,22 +25,28 @@ public class Main {
             double b = scanner.nextDouble();
 
             double result = 0;
-            switch (opcao){
-                case "1":
-                    result = calculator.sum(a,b);
-                    break;
-                case "2":
-                    result = calculator.subtract(a,b);
-                    break;
-                case "3":
-                    result = calculator.divide(a,b);
-                    break;
-                case "4":
-                    result = calculator.multiply(a,b);
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
+            try {
+                switch (opcao){
+                    case "1":
+                        result = calculator.sum(a,b);
+                        break;
+                    case "2":
+                        result = calculator.subtract(a,b);
+                        break;
+                    case "3":
+                        result = calculator.divide(a,b);
+                        break;
+                    case "4":
+                        result = calculator.multiply(a,b);
+                        break;
+                    default:
+                        System.out.println("Opção inválida!");
+                        continue;
 
+                }
+            } catch (ArithmeticException e) {
+                System.out.println("Erro: " + e.getMessage());
+                continue;
             }
 
             System.out.println("O resultado é: " + result);
