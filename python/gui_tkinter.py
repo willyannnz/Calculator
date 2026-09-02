@@ -74,9 +74,12 @@ def calculate():
     function = operations[operator_map[pending_operator]]
     result = function(accumulated_result, current_number)
 
+    #Here we check if the result is None, which means that the operation was invalid (like division by zero)
     if result is None:
         display.delete(0, tk.END)
         display.insert(tk.END, "Erro: Divisão por zero")
+        accumulated_result = None
+        pending_operator = None 
         return
 
 
