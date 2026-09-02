@@ -98,6 +98,8 @@ for i, number in enumerate(numbers):
     button = tk.Button(
         window,
         text = number,
+        bg = "lightgray",
+        fg = "black",
         command = lambda num=number: add_number(num)
     )
 
@@ -112,6 +114,8 @@ for i, operation in enumerate(operators):
     button = tk.Button(
         window,
         text=operation,
+        bg="orange",
+        fg="white",
         command=lambda op=operation: add_operator(op)
     )
 
@@ -121,6 +125,8 @@ for i, operation in enumerate(operators):
 button_equal = tk.Button(
     window,
     text="=",
+    bg="green",
+    fg="white",
     command=calculate
 )
 button_equal.grid(row=4, column=1, sticky="nsew")
@@ -129,6 +135,8 @@ button_equal.grid(row=4, column=1, sticky="nsew")
 button_clear = tk.Button(
     window,
     text="C",
+    bg="red",
+    fg="white",
     command=clear_all
 )
 button_clear.grid(row=4, column=2, sticky="nsew")
