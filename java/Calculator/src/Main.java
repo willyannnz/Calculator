@@ -6,6 +6,7 @@ public class Main {
         Calculator calculator = new Calculator();
 
         while (true){
+            // Firstly the loop will show the menu to user
             System.out.println("=-=-=-=-=-Calculadora-=-=-=-=");
             System.out.println("\n1. Soma." +
                     "\n2. Subtração." +
@@ -13,8 +14,9 @@ public class Main {
                     "\n4. Multiplicação." +
                     "\n0. Sair.");
             System.out.println("Escolha uma opção: ");
-            String opcao = scanner.next();
-            if (opcao.equals("0")){
+            String opition = scanner.next();
+            // if variable option get number 0 the loop will break
+            if (opition.equals("0")){
                 System.out.println("Encerrando...");
                 break;
             }
@@ -25,8 +27,10 @@ public class Main {
             double b = scanner.nextDouble();
 
             double result = 0;
+
+            // Here the code will try to run some this switch-cases
             try {
-                switch (opcao){
+                switch (opition){
                     case "1":
                         result = calculator.sum(a,b);
                         break;
@@ -44,6 +48,8 @@ public class Main {
                         continue;
 
                 }
+            //if switch-case to has some mathematical error this part will be execute...
+                //The error message will be show in the terminal and after the code continue loop
             } catch (ArithmeticException e) {
                 System.out.println("Erro: " + e.getMessage());
                 continue;
