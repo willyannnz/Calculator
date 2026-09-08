@@ -28,29 +28,12 @@ public class Main {
 
             double result = 0;
 
-            // Here the code will try to run some this switch-cases
+            // Here the code will try to run some this part
             try {
-                switch (opition){
-                    case "1":
-                        result = calculator.sum(a,b);
-                        break;
-                    case "2":
-                        result = calculator.subtract(a,b);
-                        break;
-                    case "3":
-                        result = calculator.divide(a,b);
-                        break;
-                    case "4":
-                        result = calculator.multiply(a,b);
-                        break;
-                    default:
-                        System.out.println("Opção inválida!");
-                        continue;
-
-                }
-            //if switch-case to has some mathematical error this part will be execute...
+                result = calculator.calculate(opition, a, b);
+            //if this to has some mathematical error this part will be execute...
                 //The error message will be show in the terminal and after the code continue loop
-            } catch (ArithmeticException e) {
+            } catch (ArithmeticException | IllegalArgumentException e) {
                 System.out.println("Erro: " + e.getMessage());
                 continue;
             }
