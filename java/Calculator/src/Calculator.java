@@ -8,19 +8,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Calculator {
-    private Map<String, Operation> Operations;
+    private Map<String, Operation> operations;
 
     public Calculator() {
-        Operations = new HashMap<>();
-        Operations.put("1", new Sum());
-        Operations.put("2", new Subtract());
-        Operations.put("3", new Divide());
-        Operations.put("4", new Multiply());
+        operations = new HashMap<>();
+        operations.put("1", new Sum());
+        operations.put("2", new Subtract());
+        operations.put("3", new Divide());
+        operations.put("4", new Multiply());
 
     }
 
-    public double Calculate (String opcao, double a, double b){
-        Operation Operation = Operations.get(opcao);
-        return Operation.calculate(a,b);
+    public double calculate (String opcao, double a, double b){
+        Operation operation = operations.get(opcao);
+        return operation.calculate(a,b);
     }
 }
